@@ -62,21 +62,31 @@ if(!$query) die('query error: ' . $con->error);
                 <p><b>' . $venue_icon . ' Тип помещения:</b> ' . $venue . '</p>
                 <p><b>💳 Способ оплаты:</b> ' . htmlspecialchars($request['payment']) . '</p>
                 <p><b>📊 Статус:</b> <span class="' . $status_class . '">' . $status_text . '</span></p>';
-            
-            // Если есть отзыв/доп. комментарий, показываем его
-            if(!empty($request['review'])) {
-                echo '<div class="review-text"><b>⭐ Отзыв о проведении:</b> ' . htmlspecialchars($request['review']) . '</div>';
+
+            // Комментарий, оставленный при бронировании (request.comment).
+            if(!empty($request['comment'])) {
+                echo '<div class="comment-text"><b>📝 Доп. информация:</b> ' . htmlspecialchars($request['comment']) . '</div>';
             }
-            
+
+            // Отзыв о проведённом мероприятии (request.review).
+            if(!empty($request['review'])) {
+                echo '<div class="review-text"><b>⭐ Ваш отзыв:</b> ' . htmlspecialchars($request['review']) . '</div>';
+            }
+
             // Форма отзыва доступна только после того, как администратор
             // перевёл заявку в статус «Мероприятие завершено» (требование ТЗ).
+            // Отзыв пишется в отдельную колонку review и не затирает исходный comment.
             if($request['status'] === 'Мероприятие завершено') {
+                $review_placeholder = empty($request['review'])
+                    ? '✍️ Оставьте отзыв о качестве организации конференции...'
+                    : '✏️ Обновить отзыв';
+                $btn_label = empty($request['review']) ? '⭐ Оставить отзыв' : '💾 Сохранить';
                 echo '
                 <div class="review-form">
                     <form action="" method="POST">
                         <input type="hidden" name="request_id" value="' . $request['id'] . '">
-                        <input type="text" name="review" placeholder="✍️ Оставьте отзыв о качестве организации конференции..." value="' . htmlspecialchars($request['review'] ?? '') . '">
-                        <button type="submit">⭐ Оставить отзыв</button>
+                        <input type="text" name="review" placeholder="' . $review_placeholder . '" value="' . htmlspecialchars($request['review'] ?? '') . '">
+                        <button type="submit">' . $btn_label . '</button>
                     </form>
                 </div>';
             }

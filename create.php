@@ -6,22 +6,26 @@ $success = false;
 $error = false;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $review = $_POST['review'];        // доп. информация
+    // Доп. информация при бронировании — пишется в request.comment.
+    // Отзыв о проведённом мероприятии хранится отдельно в request.review
+    // и заполняется в history.php после статуса «Мероприятие завершено».
+    $comment = $_POST['comment'] ?? '';
     $date = $_POST['date'];            // дата и время
     $venue = $_POST['venue'];          // тип помещения
     $payment = $_POST['payment'];      // способ оплаты
     $status = 'Новая';                 // статус заявки
-    
+
     include('db.php');
-    
+
     $user_id = (int)$_SESSION['user_id'];
-    $review = $con->real_escape_string($review);
-    $venue = $con->real_escape_string($venue);
+    $comment = $con->real_escape_string($comment);
+    $venue   = $con->real_escape_string($venue);
     $payment = $con->real_escape_string($payment);
-    
-    $query = $con->query("INSERT INTO request (review, date, curses, payment, user_id, status) 
-                          VALUES ('$review', '$date', '$venue', '$payment', '$user_id', '$status')");
-    
+    $date    = $con->real_escape_string($date);
+
+    $query = $con->query("INSERT INTO request (comment, date, curses, payment, user_id, status)
+                          VALUES ('$comment', '$date', '$venue', '$payment', '$user_id', '$status')");
+
     if (!$query) {
         $error = true;
         $error_msg = 'Ошибка: ' . $con->error;
@@ -85,8 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <option value="карта">💳 Онлайн банковской картой</option>
             </select>
 
-            <label for="review">📝 Дополнительная информация</label>
-            <textarea id="review" name="review" placeholder="Укажите количество участников, необходимость дополнительного оборудования (микрофоны, флипчарты, кейтеринг) и особые пожелания..."></textarea>
+            <label for="comment">📝 Дополнительная информация</label>
+            <textarea id="comment" name="comment" placeholder="Укажите количество участников, необходимость дополнительного оборудования (микрофоны, флипчарты, кейтеринг) и особые пожелания..."></textarea>
              
             <button type="submit" id="submitBtn">📋 Забронировать помещение</button>
         </form>

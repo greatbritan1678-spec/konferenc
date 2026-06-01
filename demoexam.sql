@@ -34,6 +34,7 @@ CREATE TABLE `request` (
   `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Новая',
   `curses` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `payment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `review` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -41,8 +42,8 @@ CREATE TABLE `request` (
 -- Дамп данных таблицы `request`
 --
 
-INSERT INTO `request` (`id`, `user_id`, `date`, `status`, `curses`, `payment`, `review`) VALUES
-(17, 15, '2026-06-17 12:55:00', 'Мероприятие назначено', 'Коворкинг', 'перевод', 'zb');
+INSERT INTO `request` (`id`, `user_id`, `date`, `status`, `curses`, `payment`, `comment`, `review`) VALUES
+(17, 15, '2026-06-17 12:55:00', 'Мероприятие назначено', 'Коворкинг', 'перевод', 'zb', NULL);
 
 -- --------------------------------------------------------
 
