@@ -1361,7 +1361,8 @@ body.page-history .review-form button:hover {
     transform: translateY(-2px);
 }
 
-/* Отзыв/комментарий */
+/* Доп. информация при бронировании и отзыв после мероприятия */
+body.page-history .comment-text,
 body.page-history .review-text {
     margin-top: 14px;
     padding: 12px 16px;
@@ -1373,6 +1374,11 @@ body.page-history .review-text {
     border-left: 3px solid var(--green);
 }
 
+body.page-history .comment-text {
+    border-left-color: var(--gray-light);
+}
+
+body.page-history .comment-text b,
 body.page-history .review-text b {
     color: var(--gray-dark);
     font-weight: 600;
@@ -1556,11 +1562,20 @@ body.page-admin .stat-card {
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     border-left: 4px solid var(--green);
     transition: all 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: block;
 }
 
 body.page-admin .stat-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+body.page-admin .stat-card.active {
+    box-shadow: 0 0 0 2px var(--green), 0 12px 24px rgba(40,167,69,0.18);
+    background: #f4fbf6;
 }
 
 body.page-admin .stat-number {
@@ -1575,6 +1590,114 @@ body.page-admin .stat-label {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+/* Фильтры (тип помещения, пользователь) + сводка по выборке */
+body.page-admin .filters-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+    padding: 0 32px 16px;
+    background: var(--gray-bg);
+}
+
+body.page-admin .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 200px;
+    flex: 1 1 200px;
+}
+
+body.page-admin .filter-group label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+body.page-admin .filter-group select {
+    padding: 10px 14px;
+    border: 1px solid var(--gray-light);
+    border-radius: 12px;
+    background: var(--white);
+    font-size: 14px;
+    color: var(--gray-dark);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+body.page-admin .filter-group select:focus {
+    outline: none;
+    border-color: var(--green);
+}
+
+body.page-admin .filter-reset {
+    align-self: center;
+}
+
+body.page-admin .filter-summary {
+    margin-left: auto;
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+body.page-admin .filter-summary b {
+    color: var(--gray-dark);
+}
+
+/* Полоса сортировки */
+body.page-admin .sort-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 0 32px 18px;
+    background: var(--gray-bg);
+}
+
+body.page-admin .sort-bar-label {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-right: 6px;
+}
+
+body.page-admin .sort-btn {
+    text-decoration: none;
+    color: var(--gray-dark);
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+body.page-admin .sort-btn:hover {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+body.page-admin .sort-btn.active {
+    background: var(--green);
+    color: var(--white);
+    border-color: var(--green);
+}
+
+@media (max-width: 480px) {
+    body.page-admin .filters-bar,
+    body.page-admin .sort-bar {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    body.page-admin .filter-summary {
+        margin-left: 0;
+    }
 }
 
 /* Список заявок */
