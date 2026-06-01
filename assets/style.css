@@ -1,0 +1,1830 @@
+/* =================================================================
+   КОНФЕРЕНЦИИ.РФ — ЕДИНАЯ ТАБЛИЦА СТИЛЕЙ
+   --------------------------------------------------------------
+   Структура:
+     1.  CSS-переменные (палитра, радиусы, тени) — :root
+     2.  Глобальные сбросы и keyframes-анимации
+     3.  Стили страниц (скоупятся через body.page-{name}):
+           • body.page-home     — index.php
+           • body.page-login    — login.php
+           • body.page-register — register.php
+           • body.page-create   — create.php
+           • body.page-history  — history.php
+           • body.page-admin    — admin.php
+   ================================================================= */
+
+/* ===== 1. CSS-ПЕРЕМЕННЫЕ (меняйте здесь, чтобы изменить весь сайт) ===== */
+
+:root {
+    --gray-dark: #343A40;
+    --gray-light: #CED4DA;
+    --green: #28A745;
+    --white: #FFFFFF;
+    --gray-bg: #F4F6F8;
+    --text-muted: #6c757d;
+    --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.08);
+    --border-radius: 16px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* ===== 2. ГЛОБАЛЬНЫЕ СБРОСЫ ===== */
+* {
+    margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+}
+
+/* ===== 2.1. ОБЩИЕ KEYFRAMES (используются на нескольких страницах) ===== */
+@keyframes fadeIn {
+    from { opacity: 0.4; }
+          to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+                    opacity: 0;
+                    transform: translateY(15px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+}
+
+@keyframes fadeOut {
+    to {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+}
+
+@keyframes float {
+    0% {
+                    transform: translateY(0) rotate(0deg);
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(360deg);
+                }
+}
+
+@keyframes formFadeIn {
+    from {
+                    opacity: 0;
+                    transform: scale(0.98);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+}
+
+@keyframes shakeError {
+    0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-6px); }
+                75% { transform: translateX(6px); }
+}
+
+@keyframes slideInRight {
+    from {
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+}
+
+@keyframes slideInUp {
+    from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes waveMove {
+    0% { background-position-x: 0; }
+                100% { background-position-x: 1440px; }
+}
+
+
+/* =================================================================
+   3. INDEX — главная страница (слайдер, карточки помещений)
+   ================================================================= */
+
+/* ===== ЦВЕТОВАЯ СХЕМА (по заданию) ===== */
+body.page-home {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--gray-bg);
+    color: var(--gray-dark);
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+/* Типографика: размеры и веса согласно ТЗ */
+body.page-home h1 {
+    font-size: 36px;
+    font-weight: 700;      /* Bold */
+    color: var(--gray-dark);
+    letter-spacing: -0.3px;
+}
+
+body.page-home h2, body.page-home h3 {
+    font-weight: 600;      /* Semi-Bold */
+    color: var(--gray-dark);
+}
+
+body.page-home h2 {
+    font-size: 24px;
+}
+
+body.page-home h3 {
+    font-size: 18px;
+}
+
+body.page-home p, body.page-home .main-text, body.page-home .feature-card p, body.page-home .nav-buttons a {
+    font-size: 16px;
+    font-weight: 400;      /* Regular */
+}
+
+body.page-home .small-text, body.page-home .footer, body.page-home .slide-text, body.page-home .dot-container, body.page-home .text-muted {
+    font-size: 12px;
+    font-weight: 300;      /* Light */
+}
+
+/* ===== ШАПКА ===== */
+body.page-home .header {
+    background: var(--white);
+    border-bottom: 3px solid var(--green);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+body.page-home .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+}
+
+body.page-home .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    text-decoration: none;
+    letter-spacing: -0.2px;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+body.page-home .logo:hover {
+    color: var(--green);
+}
+
+body.page-home .nav-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+body.page-home .nav-buttons a {
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1.5px solid transparent;
+}
+
+body.page-home .btn-login, body.page-home .btn-register {
+    background: transparent;
+    border-color: var(--green);
+    color: var(--green);
+}
+
+body.page-home .btn-login:hover, body.page-home .btn-register:hover {
+    background: var(--green);
+    color: var(--white);
+}
+
+body.page-home .btn-admin, body.page-home .btn-lk, body.page-home .btn-create {
+    background: transparent;
+    border-color: var(--green);
+    color: var(--green);
+}
+
+body.page-home .btn-admin:hover, body.page-home .btn-lk:hover, body.page-home .btn-create:hover {
+    background: var(--green);
+    color: var(--white);
+}
+
+body.page-home .btn-exit {
+    background: transparent;
+    border-color: var(--gray-light);
+    color: var(--gray-dark);
+}
+
+body.page-home .btn-exit:hover {
+    background: var(--gray-dark);
+    border-color: var(--gray-dark);
+    color: var(--white);
+}
+
+/* ===== СЛАЙДЕР ===== */
+body.page-home .slideshow-container {
+    max-width: 1100px;
+    position: relative;
+    margin: 40px auto 20px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    background: var(--white);
+}
+
+body.page-home .mySlides {
+    display: none;
+}
+
+body.page-home .fade {
+    animation: fadeIn 1s ease;
+}
+
+body.page-home .mySlides img {
+    width: 100%;
+    height: 440px;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-home .slide-text {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: rgba(52, 58, 64, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 0.3px;
+}
+
+body.page-home .prev, body.page-home .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(52, 58, 64, 0.7);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    padding: 12px 18px;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: 0.2s;
+    font-weight: 500;
+    width: 44px;
+    text-align: center;
+}
+
+body.page-home .prev {
+    left: 16px;
+}
+
+body.page-home .next {
+    right: 16px;
+}
+
+body.page-home .prev:hover, body.page-home .next:hover {
+    background: var(--green);
+}
+
+body.page-home .dot-container {
+    text-align: center;
+    padding: 20px 0 12px;
+}
+
+body.page-home .dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 6px;
+    background-color: var(--gray-light);
+    border-radius: 50%;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+body.page-home .dot.active, body.page-home .dot:hover {
+    background-color: var(--green);
+    transform: scale(1.2);
+}
+
+/* ===== СЕКЦИЯ: типы помещений ===== */
+body.page-home .features-section {
+    max-width: 1200px;
+    margin: 48px auto;
+    padding: 0 24px;
+}
+
+body.page-home .features-title {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+body.page-home .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+}
+
+body.page-home .feature-card {
+    background: var(--white);
+    padding: 32px 24px;
+    border-radius: 28px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid var(--gray-light);
+}
+
+body.page-home .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--green);
+}
+
+body.page-home .feature-icon {
+    font-size: 48px;
+    margin-bottom: 18px;
+    display: inline-block;
+}
+
+body.page-home .feature-card h3 {
+    margin-bottom: 12px;
+    color: var(--gray-dark);
+}
+
+body.page-home .feature-card p {
+    color: #495057;
+    margin-bottom: 20px;
+}
+
+body.page-home .btn-demo {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+    padding: 8px 24px;
+    border-radius: 60px;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+body.page-home .btn-demo:hover {
+    background: var(--green);
+    color: var(--white);
+}
+
+body.page-home .info-banner {
+    background: var(--white);
+    border-radius: 28px;
+    max-width: 1000px;
+    margin: 32px auto;
+    padding: 28px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-sm);
+}
+
+body.page-home .info-banner p {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--gray-dark);
+}
+
+body.page-home .info-banner strong {
+    color: var(--green);
+    font-weight: 600;
+}
+
+body.page-home .badge {
+    background: var(--green);
+    color: var(--white);
+    padding: 6px 20px;
+    border-radius: 60px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+body.page-home .footer {
+    text-align: center;
+    padding: 28px 20px;
+    background: var(--white);
+    border-top: 1px solid var(--gray-light);
+    font-size: 12px;
+    font-weight: 300;
+    color: #6c757d;
+    margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+    body.page-home .nav {
+        flex-direction: column;
+        gap: 12px;
+    }
+    body.page-home .mySlides img {
+        height: 260px;
+    }
+    body.page-home .slide-text {
+        font-size: 11px;
+        bottom: 12px;
+        left: 12px;
+        padding: 6px 12px;
+    }
+    body.page-home .prev, body.page-home .next {
+        padding: 6px 12px;
+        width: 36px;
+        font-size: 16px;
+    }
+    body.page-home .features-title h1 {
+        font-size: 28px;
+    }
+    body.page-home .info-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+    body.page-home .feature-card {
+        padding: 24px 18px;
+    }
+}
+
+
+/* =================================================================
+   3. LOGIN — страница входа
+   ================================================================= */
+
+body.page-login {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body.page-login .wave-bg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(40,167,69,0.05)" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,208C384,203,480,181,576,181.3C672,181,768,203,864,208C960,213,1056,203,1152,186.7C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') repeat-x;
+    background-size: cover;
+    animation: waveMove 12s linear infinite;
+    z-index: 0;
+}
+
+body.page-login .container {
+    max-width: 460px;
+    width: 100%;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 28px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    animation: slideInUp 0.5s ease-out;
+    position: relative;
+    z-index: 1;
+    border: 1px solid var(--gray-light);
+}
+
+body.page-login .logo {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+body.page-login .logo h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+}
+
+body.page-login .logo p {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-login .form-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+body.page-login .form-header h2 {
+    color: var(--gray-dark);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+body.page-login .form-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-login .error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 14px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    text-align: center;
+    border-left: 4px solid #dc3545;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-login .form-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+body.page-login .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--gray-dark);
+    font-size: 14px;
+}
+
+body.page-login .form-group label span {
+    margin-right: 8px;
+}
+
+body.page-login .form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 16px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    background: var(--white);
+}
+
+body.page-login .form-group input:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+}
+
+body.page-login .form-group input:hover {
+    border-color: var(--green);
+}
+
+body.page-login .btn-login {
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    margin-top: 8px;
+}
+
+body.page-login .btn-login:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3);
+}
+
+body.page-login .btn-login:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+body.page-login .form-footer {
+    margin-top: 28px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-light);
+}
+
+body.page-login .form-footer p {
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-login .register-link {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+body.page-login .register-link:hover {
+    color: #1e7e34;
+    text-decoration: underline;
+}
+
+body.page-login .back-home {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 300;
+    transition: color 0.2s ease;
+}
+
+body.page-login .back-home:hover {
+    color: var(--green);
+}
+
+body.page-login .form-group {
+    animation: fadeInUp 0.4s ease-out;
+    animation-fill-mode: both;
+}
+
+body.page-login .form-group:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+body.page-login .form-group:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+body.page-login .btn-login {
+    animation: fadeInUp 0.4s ease-out 0.15s both;
+}
+
+body.page-login .form-footer {
+    animation: fadeInUp 0.4s ease-out 0.2s both;
+}
+
+@media (max-width: 480px) {
+    body.page-login .container {
+        padding: 28px 20px;
+    }
+    body.page-login .logo h1 {
+        font-size: 24px;
+    }
+    body.page-login .form-header h2 {
+        font-size: 20px;
+    }
+    body.page-login .btn-login {
+        padding: 12px;
+    }
+}
+
+
+/* =================================================================
+   3. REGISTER — страница регистрации
+   ================================================================= */
+
+body.page-register {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body.page-register .bg-decor {
+    position: fixed;
+    border-radius: 50%;
+    background: rgba(40, 167, 69, 0.04);
+    animation: float 20s infinite linear;
+    z-index: 0;
+}
+
+body.page-register .container {
+    max-width: 540px;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    animation: slideInUp 0.5s ease-out;
+    position: relative;
+    z-index: 1;
+    border: 1px solid var(--gray-light);
+}
+
+body.page-register .logo {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+body.page-register .logo h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+}
+
+body.page-register .logo p {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-register .form-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+body.page-register .form-header h2 {
+    color: var(--gray-dark);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+body.page-register .form-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-register .error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 14px 16px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    text-align: center;
+    border-left: 4px solid #dc3545;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-register .success-message {
+    background: #e3f5e8;
+    color: #155724;
+    padding: 18px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    text-align: center;
+    border-left: 4px solid var(--green);
+    font-size: 15px;
+    font-weight: 400;
+}
+
+body.page-register .form-group {
+    margin-bottom: 20px;
+}
+
+body.page-register .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--gray-dark);
+    font-size: 14px;
+}
+
+body.page-register .form-group label span {
+    margin-right: 8px;
+}
+
+body.page-register .form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 14px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    background: var(--white);
+}
+
+body.page-register .form-group input:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+}
+
+body.page-register .form-group input:hover {
+    border-color: var(--green);
+}
+
+body.page-register .hint {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-top: 6px;
+    display: block;
+}
+
+body.page-register .btn-register {
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    margin-top: 12px;
+}
+
+body.page-register .btn-register:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3);
+}
+
+body.page-register .btn-register:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+body.page-register .form-footer {
+    margin-top: 28px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-light);
+}
+
+body.page-register .form-footer p {
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-register .login-link {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+body.page-register .login-link:hover {
+    color: #1e7e34;
+    text-decoration: underline;
+}
+
+body.page-register .back-home {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 300;
+    transition: color 0.2s ease;
+}
+
+body.page-register .back-home:hover {
+    color: var(--green);
+}
+
+@media (max-width: 550px) {
+    body.page-register .container {
+        padding: 28px 20px;
+    }
+    body.page-register .logo h1 {
+        font-size: 24px;
+    }
+    body.page-register .form-header h2 {
+        font-size: 20px;
+    }
+    body.page-register .btn-register {
+        padding: 12px;
+    }
+    body.page-register .form-group input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}
+
+
+/* =================================================================
+   3. CREATE — страница оформления заявки
+   ================================================================= */
+
+/* ===== ЦВЕТОВАЯ СХЕМА (согласно ТЗ) ===== */
+body.page-create {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+body.page-create .container {
+    max-width: 580px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 28px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    animation: slideInUp 0.5s ease-out;
+    border: 1px solid var(--gray-light);
+}
+
+/* Кнопки навигации */
+body.page-create .nav-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+body.page-create .btn-nav {
+    display: inline-block;
+    padding: 10px 24px;
+    background: var(--green);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 40px;
+    text-align: center;
+    transition: all 0.25s ease;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+body.page-create .btn-nav:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+body.page-create .btn-nav:active {
+    transform: translateY(0);
+}
+
+body.page-create h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--gray-dark);
+    font-size: 28px;
+    font-weight: 700;      /* Bold */
+    letter-spacing: -0.2px;
+}
+
+/* Стили формы */
+body.page-create form {
+    animation: formFadeIn 0.4s ease-out 0.1s both;
+}
+
+body.page-create form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;      /* Medium */
+    color: var(--gray-dark);
+    font-size: 14px;
+}
+
+body.page-create form input, body.page-create form select, body.page-create form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 16px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    background: var(--white);
+}
+
+body.page-create form input:focus, body.page-create form select:focus, body.page-create form textarea:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+}
+
+body.page-create form input:hover, body.page-create form select:hover, body.page-create form textarea:hover {
+    border-color: var(--green);
+}
+
+body.page-create form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Кнопка отправки */
+body.page-create form button {
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;      /* Semi-Bold */
+    transition: all 0.25s ease;
+    margin-top: 8px;
+}
+
+body.page-create form button:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3);
+}
+
+body.page-create form button:active {
+    transform: translateY(0);
+}
+
+/* Сообщения об успехе/ошибке */
+body.page-create .success-message {
+    background: #e3f5e8;
+    color: #155724;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    text-align: center;
+    border-left: 4px solid var(--green);
+    font-size: 15px;
+    font-weight: 400;
+}
+
+body.page-create .error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 14px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    text-align: center;
+    border-left: 4px solid #dc3545;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body.page-create .success-message a, body.page-create .error-message a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+body.page-create .success-message a:hover, body.page-create .error-message a:hover {
+    color: var(--green);
+}
+
+/* Эффект загрузки кнопки */
+body.page-create form button.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+body.page-create form button.loading::after {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.6s linear infinite;
+    vertical-align: middle;
+}
+
+/* Мелкий текст (подсказки) */
+body.page-create .hint-text {
+    font-size: 12px;
+    font-weight: 300;      /* Light */
+    color: var(--text-muted);
+    margin-top: -12px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    body.page-create .container {
+        padding: 28px 20px;
+        margin: 0 15px;
+    }
+    body.page-create h1 {
+        font-size: 24px;
+    }
+    body.page-create .nav-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    body.page-create form input, body.page-create form select, body.page-create form textarea {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    body.page-create form button {
+        padding: 12px;
+    }
+}
+
+
+/* =================================================================
+   3. HISTORY — личный кабинет (история бронирований)
+   ================================================================= */
+
+/* ===== ЦВЕТОВАЯ СХЕМА (ТЗ) ===== */
+body.page-history {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+body.page-history .container {
+    max-width: 950px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 28px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    animation: slideInUp 0.5s ease-out;
+    border: 1px solid var(--gray-light);
+}
+
+/* Кнопка на главную */
+body.page-history .btn-home {
+    display: inline-block;
+    background: var(--green);
+    color: var(--white);
+    padding: 10px 24px;
+    text-decoration: none;
+    border-radius: 40px;
+    margin-bottom: 28px;
+    transition: all 0.25s ease;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+body.page-history .btn-home:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+body.page-history h1 {
+    text-align: center;
+    margin-bottom: 32px;
+    color: var(--gray-dark);
+    font-size: 28px;
+    font-weight: 700;      /* Bold */
+    letter-spacing: -0.2px;
+}
+
+/* Сообщение об успехе */
+body.page-history .success-message {
+    background: #e3f5e8;
+    color: #155724;
+    padding: 14px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    text-align: center;
+    border-left: 4px solid var(--green);
+    font-size: 14px;
+    font-weight: 400;
+    animation: slideInRight 0.4s ease-out;
+}
+
+/* Карточка бронирования */
+body.page-history .request {
+    border: 1px solid var(--gray-light);
+    margin: 20px 0;
+    padding: 24px;
+    border-radius: 24px;
+    background: var(--white);
+    transition: all 0.25s ease;
+}
+
+body.page-history .request:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--green);
+}
+
+body.page-history .request h2 {
+    margin-top: 0;
+    color: var(--gray-dark);
+    font-size: 20px;
+    font-weight: 600;      /* Semi-Bold */
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+body.page-history .request b {
+    color: var(--gray-dark);
+    font-weight: 600;
+}
+
+body.page-history .request p {
+    margin: 10px 0;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+/* Статусы бронирований */
+body.page-history .status-new {
+    color: #856404;
+    font-weight: 600;
+    background: #fff3cd;
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-size: 12px;
+}
+
+body.page-history .status-processing {
+    color: #0c5460;
+    font-weight: 600;
+    background: #d1ecf1;
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-size: 12px;
+}
+
+body.page-history .status-completed {
+    color: #155724;
+    font-weight: 600;
+    background: #e3f5e8;
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-size: 12px;
+}
+
+body.page-history .status-cancelled {
+    color: #721c24;
+    font-weight: 600;
+    background: #f8d7da;
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-size: 12px;
+}
+
+/* Форма отзыва (доп. информация) */
+body.page-history .review-form {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--gray-light);
+}
+
+body.page-history .review-form form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+body.page-history .review-form input[type="text"] {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 40px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    transition: all 0.2s ease;
+}
+
+body.page-history .review-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+}
+
+body.page-history .review-form button {
+    padding: 10px 24px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.25s ease;
+}
+
+body.page-history .review-form button:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Отзыв/комментарий */
+body.page-history .review-text {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--gray-bg);
+    border-radius: 20px;
+    color: var(--gray-dark);
+    font-weight: 400;
+    font-size: 14px;
+    border-left: 3px solid var(--green);
+}
+
+body.page-history .review-text b {
+    color: var(--gray-dark);
+    font-weight: 600;
+}
+
+/* Пустое состояние */
+body.page-history .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+body.page-history .empty-state a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+body.page-history .empty-state a:hover {
+    text-decoration: underline;
+}
+
+/* Кнопка создания бронирования */
+body.page-history .create-button {
+    text-align: center;
+    margin-top: 36px;
+}
+
+body.page-history .create-button a {
+    background: var(--green);
+    color: var(--white);
+    padding: 12px 32px;
+    text-decoration: none;
+    border-radius: 40px;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.25s ease;
+}
+
+body.page-history .create-button a:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3);
+}
+
+/* Иконки для типов помещений */
+body.page-history .venue-icon {
+    display: inline-block;
+    margin-right: 6px;
+}
+
+/* Адаптивность */
+@media (max-width: 650px) {
+    body.page-history .container {
+        padding: 24px 20px;
+    }
+    body.page-history h1 {
+        font-size: 24px;
+    }
+    body.page-history .request h2 {
+        font-size: 18px;
+    }
+    body.page-history .review-form form {
+        flex-direction: column;
+    }
+    body.page-history .review-form input[type="text"] {
+        width: 100%;
+    }
+    body.page-history .review-form button {
+        width: 100%;
+    }
+}
+
+
+/* =================================================================
+   3. ADMIN — панель администратора
+   ================================================================= */
+
+body.page-admin {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+body.page-admin .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/* Шапка */
+body.page-admin .header {
+    background: var(--white);
+    padding: 28px 32px;
+    border-bottom: 3px solid var(--green);
+}
+
+body.page-admin .header h1 {
+    color: var(--gray-dark);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+}
+
+body.page-admin .subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* Навигация */
+body.page-admin .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: var(--gray-bg);
+    border-bottom: 1px solid var(--gray-light);
+}
+
+body.page-admin .btn {
+    padding: 8px 24px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+body.page-admin .btn-primary {
+    background: var(--green);
+    color: var(--white);
+}
+
+body.page-admin .btn-outline {
+    background: transparent;
+    color: var(--green);
+    border: 1.5px solid var(--green);
+}
+
+body.page-admin .btn-outline:hover {
+    background: var(--green);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+body.page-admin .btn-primary:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Статистика */
+body.page-admin .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 28px 32px;
+    background: var(--gray-bg);
+}
+
+body.page-admin .stat-card {
+    background: var(--white);
+    padding: 22px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-left: 4px solid var(--green);
+    transition: all 0.25s ease;
+}
+
+body.page-admin .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+body.page-admin .stat-number {
+    font-size: 34px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+body.page-admin .stat-label {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Список заявок */
+body.page-admin .requests-container {
+    padding: 0 32px 32px;
+}
+
+body.page-admin .request-item {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid var(--gray-light);
+    transition: all 0.25s ease;
+}
+
+body.page-admin .request-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    border-color: var(--green);
+}
+
+body.page-admin .request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+body.page-admin .user-info h3 {
+    color: var(--gray-dark);
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+
+body.page-admin .user-info p {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 14px;
+}
+
+body.page-admin .request-id {
+    background: var(--gray-bg);
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-weight: 600;
+    color: var(--gray-dark);
+    font-size: 13px;
+}
+
+body.page-admin .status-badge {
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+body.page-admin .status-new {
+    background: #fff3cd;
+    color: #856404;
+}
+
+body.page-admin .status-assigned {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+body.page-admin .status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+body.page-admin .request-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+body.page-admin .detail-item {
+    padding: 12px 16px;
+    background: var(--gray-bg);
+    border-radius: 16px;
+}
+
+body.page-admin .detail-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+}
+
+body.page-admin .detail-value {
+    font-size: 15px;
+    color: var(--gray-dark);
+    margin-top: 6px;
+    font-weight: 400;
+}
+
+/* Форма изменения статуса */
+body.page-admin .status-form {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-light);
+}
+
+body.page-admin .form-group {
+    margin-bottom: 15px;
+}
+
+body.page-admin .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--gray-dark);
+    font-size: 14px;
+}
+
+body.page-admin .form-select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 40px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    background: var(--white);
+}
+
+body.page-admin .form-select:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+}
+
+body.page-admin .btn-save {
+    width: 100%;
+    padding: 12px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+body.page-admin .btn-save:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* Пагинация */
+body.page-admin .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 30px 0;
+    padding-bottom: 32px;
+}
+
+body.page-admin .page-link {
+    padding: 8px 16px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 40px;
+    text-decoration: none;
+    color: var(--gray-dark);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+body.page-admin .page-link:hover, body.page-admin .page-link.active {
+    background: var(--green);
+    color: var(--white);
+    border-color: var(--green);
+}
+
+/* Пустое состояние */
+body.page-admin .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--gray-bg);
+    border-radius: 20px;
+}
+
+body.page-admin .empty-state i {
+    font-size: 48px;
+    color: var(--green);
+    margin-bottom: 15px;
+}
+
+body.page-admin .empty-state h3 {
+    color: var(--gray-dark);
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+body.page-admin .empty-state p {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Уведомление */
+body.page-admin .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 14px 24px;
+    background: var(--green);
+    color: var(--white);
+    border-radius: 40px;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-out 2.5s forwards;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    body.page-admin .container {
+        margin: 10px;
+        border-radius: 20px;
+    }
+    body.page-admin .header, body.page-admin .nav-bar, body.page-admin .stats-grid, body.page-admin .requests-container {
+        padding: 20px;
+    }
+    body.page-admin .nav-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    body.page-admin .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    body.page-admin .request-item {
+        padding: 18px;
+    }
+    body.page-admin .request-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
