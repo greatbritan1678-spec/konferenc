@@ -16,16 +16,65 @@
 /* ===== 1. CSS-ПЕРЕМЕННЫЕ (меняйте здесь, чтобы изменить весь сайт) ===== */
 
 :root {
+    /* ----- Базовая палитра ----- */
     --gray-dark: #343A40;
+    --gray-medium: #495057;
     --gray-light: #CED4DA;
-    --green: #28A745;
-    --white: #FFFFFF;
     --gray-bg: #F4F6F8;
+    --gray-bg-soft: #eef2f5;          /* мягкий градиент-аккомпанемент к --gray-bg */
     --text-muted: #6c757d;
-    --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.08);
-    --border-radius: 16px;
-    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --white: #FFFFFF;
+
+    /* ----- Бренд (зелёный) ----- */
+    --green: #28A745;                 /* основной зелёный (кнопки, акценты) */
+    --green-rgb: 40, 167, 69;         /* RGB-компоненты --green для rgba()-теней.
+                                         Меняй вместе с --green при смене бренда. */
+    --green-dark: #218838;            /* :hover/нажатое состояние */
+    --green-darker: #1e7e34;          /* самые тёмные акценты (border, focus) */
+
+    /* ----- Семантические цвета статусов (Bootstrap-style) ----- */
+    --success-bg: #e3f5e8;            /* фон карточки «успех» */
+    --success-bg-soft: #f4fbf6;       /* очень светлый фон «успех» */
+    --success-bg-alt: #d4edda;        /* альт. фон «успех» */
+    --success-text: #155724;          /* тёмный текст по светлому фону */
+
+    --danger: #dc3545;                /* основной красный (border, иконка) */
+    --danger-bg: #f8d7da;             /* фон ошибки */
+    --danger-text: #721c24;           /* текст ошибки */
+
+    --warning-bg: #fff3cd;            /* фон предупреждения */
+    --warning-text: #856404;          /* текст предупреждения */
+
+    --info-bg: #d1ecf1;               /* фон информационного блока */
+    --info-text: #0c5460;             /* текст информационного блока */
+
+    /* ----- Радиусы (закругления) ----- */
+    --radius-sm:      12px;             /* мелкие элементы (бейджи, инпуты) */
+    --radius-md:      16px;             /* карточки, блоки */
+    --radius-lg:      20px;             /* большие карточки */
+    --radius-xl:      24px;             /* контейнеры формы */
+    --radius-2xl:     28px;             /* hero/большие секции */
+    --radius-pill:    40px;             /* кнопки в стиле «pill» */
+    --radius-pill-lg: 60px;             /* крупные search-инпуты */
+    --radius-full:    999px;            /* полностью круглые элементы */
+    --radius-circle:  50%;              /* аватарки/иконки-кружки */
+    --border-radius:  var(--radius-md); /* legacy-алиас, оставлен для совместимости */
+
+    /* ----- Анимации (длительность + кривая) ----- */
+    --transition-fast: 0.2s ease;
+    --transition:      0.25s ease;
+
+    /* ----- Тени ----- */
+    --shadow-xs:          0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-sm:          0 8px 20px rgba(0, 0, 0, 0.05);
+    --shadow-md:          0 12px 28px rgba(0, 0, 0, 0.08);
+    --shadow-lg:          0 20px 40px rgba(0, 0, 0, 0.08);
+    --shadow:             0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-card-hover:  0 12px 24px rgba(0, 0, 0, 0.08);
+    --shadow-green-sm:    0 4px 12px rgba(var(--green-rgb), 0.3);
+    --shadow-green-md:    0 6px 14px rgba(var(--green-rgb), 0.3);
+    --shadow-green-soft:  0 12px 24px rgba(var(--green-rgb), 0.18);
+    --ring-focus:         0 0 0 3px rgba(var(--green-rgb), 0.12);
 }
 
 /* ===== 2. ГЛОБАЛЬНЫЕ СБРОСЫ ===== */
@@ -186,7 +235,7 @@ body.page-home .logo {
     color: var(--gray-dark);
     text-decoration: none;
     letter-spacing: -0.2px;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -204,11 +253,11 @@ body.page-home .nav-buttons {
 
 body.page-home .nav-buttons a {
     padding: 8px 20px;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     border: 1.5px solid transparent;
 }
 
@@ -251,7 +300,7 @@ body.page-home .slideshow-container {
     max-width: 1100px;
     position: relative;
     margin: 40px auto 20px;
-    border-radius: 24px;
+    border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-md);
     background: var(--white);
@@ -279,7 +328,7 @@ body.page-home .slide-text {
     background: rgba(52, 58, 64, 0.85);
     backdrop-filter: blur(4px);
     padding: 10px 20px;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 14px;
     font-weight: 500;
     color: var(--white);
@@ -296,8 +345,8 @@ body.page-home .prev, body.page-home .next {
     cursor: pointer;
     padding: 12px 18px;
     font-size: 20px;
-    border-radius: 50%;
-    transition: 0.2s;
+    border-radius: var(--radius-circle);
+    transition: var(--transition-fast);
     font-weight: 500;
     width: 44px;
     text-align: center;
@@ -326,9 +375,9 @@ body.page-home .dot {
     width: 10px;
     margin: 0 6px;
     background-color: var(--gray-light);
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     display: inline-block;
-    transition: 0.2s;
+    transition: var(--transition-fast);
 }
 
 body.page-home .dot.active, body.page-home .dot:hover {
@@ -357,10 +406,10 @@ body.page-home .features-grid {
 body.page-home .feature-card {
     background: var(--white);
     padding: 32px 24px;
-    border-radius: 28px;
+    border-radius: var(--radius-2xl);
     text-align: center;
     box-shadow: var(--shadow-sm);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform var(--transition), box-shadow var(--transition);
     border: 1px solid var(--gray-light);
 }
 
@@ -382,7 +431,7 @@ body.page-home .feature-card h3 {
 }
 
 body.page-home .feature-card p {
-    color: #495057;
+    color: var(--gray-medium);
     margin-bottom: 20px;
 }
 
@@ -392,11 +441,11 @@ body.page-home .btn-demo {
     border: 1px solid var(--green);
     color: var(--green);
     padding: 8px 24px;
-    border-radius: 60px;
+    border-radius: var(--radius-pill-lg);
     font-weight: 500;
     font-size: 14px;
     text-decoration: none;
-    transition: 0.2s;
+    transition: var(--transition-fast);
 }
 
 body.page-home .btn-demo:hover {
@@ -406,7 +455,7 @@ body.page-home .btn-demo:hover {
 
 body.page-home .info-banner {
     background: var(--white);
-    border-radius: 28px;
+    border-radius: var(--radius-2xl);
     max-width: 1000px;
     margin: 32px auto;
     padding: 28px 32px;
@@ -434,7 +483,7 @@ body.page-home .badge {
     background: var(--green);
     color: var(--white);
     padding: 6px 20px;
-    border-radius: 60px;
+    border-radius: var(--radius-pill-lg);
     font-weight: 500;
     font-size: 14px;
 }
@@ -446,7 +495,7 @@ body.page-home .footer {
     border-top: 1px solid var(--gray-light);
     font-size: 12px;
     font-weight: 300;
-    color: #6c757d;
+    color: var(--text-muted);
     margin-top: 48px;
 }
 
@@ -488,7 +537,7 @@ body.page-home .footer {
 
 body.page-login {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    background: linear-gradient(135deg, var(--gray-bg) 0%, var(--gray-bg-soft) 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -515,8 +564,8 @@ body.page-login .container {
     width: 100%;
     background: var(--white);
     padding: 40px;
-    border-radius: 28px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
     animation: slideInUp 0.5s ease-out;
     position: relative;
     z-index: 1;
@@ -561,13 +610,13 @@ body.page-login .form-header p {
 }
 
 body.page-login .error-message {
-    background: #f8d7da;
-    color: #721c24;
+    background: var(--danger-bg);
+    color: var(--danger-text);
     padding: 14px 18px;
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     margin-bottom: 24px;
     text-align: center;
-    border-left: 4px solid #dc3545;
+    border-left: 4px solid var(--danger);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -597,18 +646,18 @@ body.page-login .form-group input {
     width: 100%;
     padding: 12px 16px;
     border: 1.5px solid var(--gray-light);
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     background: var(--white);
 }
 
 body.page-login .form-group input:focus {
     outline: none;
     border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+    box-shadow: var(--ring-focus);
 }
 
 body.page-login .form-group input:hover {
@@ -621,19 +670,19 @@ body.page-login .btn-login {
     background: var(--green);
     color: var(--white);
     border: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
-    transition: all 0.25s ease;
+    transition: all var(--transition);
     margin-top: 8px;
 }
 
 body.page-login .btn-login:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3);
+    box-shadow: var(--shadow-green-md);
 }
 
 body.page-login .btn-login:disabled {
@@ -660,11 +709,11 @@ body.page-login .register-link {
     color: var(--green);
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
 }
 
 body.page-login .register-link:hover {
-    color: #1e7e34;
+    color: var(--green-darker);
     text-decoration: underline;
 }
 
@@ -675,7 +724,7 @@ body.page-login .back-home {
     text-decoration: none;
     font-size: 13px;
     font-weight: 300;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
 }
 
 body.page-login .back-home:hover {
@@ -725,7 +774,7 @@ body.page-login .form-footer {
 
 body.page-register {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    background: linear-gradient(135deg, var(--gray-bg) 0%, var(--gray-bg-soft) 100%);
     min-height: 100vh;
     padding: 40px 20px;
     position: relative;
@@ -734,7 +783,7 @@ body.page-register {
 
 body.page-register .bg-decor {
     position: fixed;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     background: rgba(40, 167, 69, 0.04);
     animation: float 20s infinite linear;
     z-index: 0;
@@ -746,8 +795,8 @@ body.page-register .container {
     margin: 0 auto;
     background: var(--white);
     padding: 40px;
-    border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
     animation: slideInUp 0.5s ease-out;
     position: relative;
     z-index: 1;
@@ -792,22 +841,22 @@ body.page-register .form-header p {
 }
 
 body.page-register .error-message {
-    background: #f8d7da;
-    color: #721c24;
+    background: var(--danger-bg);
+    color: var(--danger-text);
     padding: 14px 16px;
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     margin-bottom: 24px;
     text-align: center;
-    border-left: 4px solid #dc3545;
+    border-left: 4px solid var(--danger);
     font-size: 14px;
     font-weight: 400;
 }
 
 body.page-register .success-message {
-    background: #e3f5e8;
-    color: #155724;
+    background: var(--success-bg);
+    color: var(--success-text);
     padding: 18px;
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     margin-bottom: 24px;
     text-align: center;
     border-left: 4px solid var(--green);
@@ -835,18 +884,18 @@ body.page-register .form-group input {
     width: 100%;
     padding: 12px 14px;
     border: 1.5px solid var(--gray-light);
-    border-radius: 14px;
+    border-radius: var(--radius-sm);
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     background: var(--white);
 }
 
 body.page-register .form-group input:focus {
     outline: none;
     border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+    box-shadow: var(--ring-focus);
 }
 
 body.page-register .form-group input:hover {
@@ -867,19 +916,19 @@ body.page-register .btn-register {
     background: var(--green);
     color: var(--white);
     border: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
-    transition: all 0.25s ease;
+    transition: all var(--transition);
     margin-top: 12px;
 }
 
 body.page-register .btn-register:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3);
+    box-shadow: var(--shadow-green-md);
 }
 
 body.page-register .btn-register:disabled {
@@ -906,11 +955,11 @@ body.page-register .login-link {
     color: var(--green);
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
 }
 
 body.page-register .login-link:hover {
-    color: #1e7e34;
+    color: var(--green-darker);
     text-decoration: underline;
 }
 
@@ -921,7 +970,7 @@ body.page-register .back-home {
     text-decoration: none;
     font-size: 13px;
     font-weight: 300;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
 }
 
 body.page-register .back-home:hover {
@@ -955,7 +1004,7 @@ body.page-register .back-home:hover {
 /* ===== ЦВЕТОВАЯ СХЕМА (согласно ТЗ) ===== */
 body.page-create {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    background: linear-gradient(135deg, var(--gray-bg) 0%, var(--gray-bg-soft) 100%);
     min-height: 100vh;
     padding: 40px 20px;
 }
@@ -965,8 +1014,8 @@ body.page-create .container {
     margin: 0 auto;
     background: var(--white);
     padding: 40px;
-    border-radius: 28px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
     animation: slideInUp 0.5s ease-out;
     border: 1px solid var(--gray-light);
 }
@@ -986,17 +1035,17 @@ body.page-create .btn-nav {
     background: var(--green);
     color: var(--white);
     text-decoration: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     text-align: center;
-    transition: all 0.25s ease;
+    transition: all var(--transition);
     font-weight: 500;
     font-size: 14px;
 }
 
 body.page-create .btn-nav:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    box-shadow: var(--shadow-green-sm);
 }
 
 body.page-create .btn-nav:active {
@@ -1030,19 +1079,19 @@ body.page-create form input, body.page-create form select, body.page-create form
     padding: 12px 16px;
     margin-bottom: 20px;
     border: 1.5px solid var(--gray-light);
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     box-sizing: border-box;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     background: var(--white);
 }
 
 body.page-create form input:focus, body.page-create form select:focus, body.page-create form textarea:focus {
     outline: none;
     border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+    box-shadow: var(--ring-focus);
 }
 
 body.page-create form input:hover, body.page-create form select:hover, body.page-create form textarea:hover {
@@ -1061,19 +1110,19 @@ body.page-create form button {
     background: var(--green);
     color: var(--white);
     border: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;      /* Semi-Bold */
-    transition: all 0.25s ease;
+    transition: all var(--transition);
     margin-top: 8px;
 }
 
 body.page-create form button:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3);
+    box-shadow: var(--shadow-green-md);
 }
 
 body.page-create form button:active {
@@ -1082,10 +1131,10 @@ body.page-create form button:active {
 
 /* Сообщения об успехе/ошибке */
 body.page-create .success-message {
-    background: #e3f5e8;
-    color: #155724;
+    background: var(--success-bg);
+    color: var(--success-text);
     padding: 20px;
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     margin-bottom: 24px;
     text-align: center;
     border-left: 4px solid var(--green);
@@ -1094,13 +1143,13 @@ body.page-create .success-message {
 }
 
 body.page-create .error-message {
-    background: #f8d7da;
-    color: #721c24;
+    background: var(--danger-bg);
+    color: var(--danger-text);
     padding: 14px 18px;
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     margin-bottom: 24px;
     text-align: center;
-    border-left: 4px solid #dc3545;
+    border-left: 4px solid var(--danger);
     font-size: 14px;
     font-weight: 400;
 }
@@ -1109,7 +1158,7 @@ body.page-create .success-message a, body.page-create .error-message a {
     color: inherit;
     font-weight: 600;
     text-decoration: underline;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
 }
 
 body.page-create .success-message a:hover, body.page-create .error-message a:hover {
@@ -1129,7 +1178,7 @@ body.page-create form button.loading::after {
     height: 18px;
     margin-left: 10px;
     border: 2px solid white;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     border-top-color: transparent;
     animation: spin 0.6s linear infinite;
     vertical-align: middle;
@@ -1175,7 +1224,7 @@ body.page-create .hint-text {
 /* ===== ЦВЕТОВАЯ СХЕМА (ТЗ) ===== */
 body.page-history {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    background: linear-gradient(135deg, var(--gray-bg) 0%, var(--gray-bg-soft) 100%);
     min-height: 100vh;
     padding: 40px 20px;
 }
@@ -1185,8 +1234,8 @@ body.page-history .container {
     margin: 0 auto;
     background: var(--white);
     padding: 40px;
-    border-radius: 28px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
     animation: slideInUp 0.5s ease-out;
     border: 1px solid var(--gray-light);
 }
@@ -1198,17 +1247,17 @@ body.page-history .btn-home {
     color: var(--white);
     padding: 10px 24px;
     text-decoration: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     margin-bottom: 28px;
-    transition: all 0.25s ease;
+    transition: all var(--transition);
     font-weight: 500;
     font-size: 14px;
 }
 
 body.page-history .btn-home:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    box-shadow: var(--shadow-green-sm);
 }
 
 body.page-history h1 {
@@ -1222,10 +1271,10 @@ body.page-history h1 {
 
 /* Сообщение об успехе */
 body.page-history .success-message {
-    background: #e3f5e8;
-    color: #155724;
+    background: var(--success-bg);
+    color: var(--success-text);
     padding: 14px 18px;
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     margin-bottom: 24px;
     text-align: center;
     border-left: 4px solid var(--green);
@@ -1239,14 +1288,14 @@ body.page-history .request {
     border: 1px solid var(--gray-light);
     margin: 20px 0;
     padding: 24px;
-    border-radius: 24px;
+    border-radius: var(--radius-xl);
     background: var(--white);
-    transition: all 0.25s ease;
+    transition: all var(--transition);
 }
 
 body.page-history .request:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-card-hover);
     border-color: var(--green);
 }
 
@@ -1273,42 +1322,42 @@ body.page-history .request p {
 
 /* Статусы бронирований */
 body.page-history .status-new {
-    color: #856404;
+    color: var(--warning-text);
     font-weight: 600;
-    background: #fff3cd;
+    background: var(--warning-bg);
     display: inline-block;
     padding: 4px 14px;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 12px;
 }
 
 body.page-history .status-processing {
-    color: #0c5460;
+    color: var(--info-text);
     font-weight: 600;
-    background: #d1ecf1;
+    background: var(--info-bg);
     display: inline-block;
     padding: 4px 14px;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 12px;
 }
 
 body.page-history .status-completed {
-    color: #155724;
+    color: var(--success-text);
     font-weight: 600;
-    background: #e3f5e8;
+    background: var(--success-bg);
     display: inline-block;
     padding: 4px 14px;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 12px;
 }
 
 body.page-history .status-cancelled {
-    color: #721c24;
+    color: var(--danger-text);
     font-weight: 600;
-    background: #f8d7da;
+    background: var(--danger-bg);
     display: inline-block;
     padding: 4px 14px;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 12px;
 }
 
@@ -1330,17 +1379,17 @@ body.page-history .review-form input[type="text"] {
     flex: 1;
     padding: 12px 16px;
     border: 1.5px solid var(--gray-light);
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
 }
 
 body.page-history .review-form input[type="text"]:focus {
     outline: none;
     border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+    box-shadow: var(--ring-focus);
 }
 
 body.page-history .review-form button {
@@ -1348,16 +1397,16 @@ body.page-history .review-form button {
     background: var(--green);
     color: var(--white);
     border: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 14px;
-    transition: all 0.25s ease;
+    transition: all var(--transition);
 }
 
 body.page-history .review-form button:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
 }
 
@@ -1367,7 +1416,7 @@ body.page-history .review-text {
     margin-top: 14px;
     padding: 12px 16px;
     background: var(--gray-bg);
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     color: var(--gray-dark);
     font-weight: 400;
     font-size: 14px;
@@ -1414,16 +1463,16 @@ body.page-history .create-button a {
     color: var(--white);
     padding: 12px 32px;
     text-decoration: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-weight: 600;
     display: inline-block;
-    transition: all 0.25s ease;
+    transition: all var(--transition);
 }
 
 body.page-history .create-button a:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3);
+    box-shadow: var(--shadow-green-md);
 }
 
 /* Иконки для типов помещений */
@@ -1461,7 +1510,7 @@ body.page-history .venue-icon {
 
 body.page-admin {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, var(--gray-bg) 0%, #eef2f5 100%);
+    background: linear-gradient(135deg, var(--gray-bg) 0%, var(--gray-bg-soft) 100%);
     min-height: 100vh;
     padding: 20px;
 }
@@ -1509,11 +1558,11 @@ body.page-admin .nav-bar {
 body.page-admin .btn {
     padding: 8px 24px;
     border: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
-    transition: all 0.25s ease;
+    transition: all var(--transition);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -1536,13 +1585,13 @@ body.page-admin .btn-outline:hover {
     background: var(--green);
     color: var(--white);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    box-shadow: var(--shadow-green-sm);
 }
 
 body.page-admin .btn-primary:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    box-shadow: var(--shadow-green-sm);
 }
 
 /* Статистика */
@@ -1557,11 +1606,11 @@ body.page-admin .stats-grid {
 body.page-admin .stat-card {
     background: var(--white);
     padding: 22px;
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: var(--shadow-xs);
     border-left: 4px solid var(--green);
-    transition: all 0.25s ease;
+    transition: all var(--transition);
     text-decoration: none;
     color: inherit;
     cursor: pointer;
@@ -1570,12 +1619,12 @@ body.page-admin .stat-card {
 
 body.page-admin .stat-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    box-shadow: var(--shadow-card-hover);
 }
 
 body.page-admin .stat-card.active {
-    box-shadow: 0 0 0 2px var(--green), 0 12px 24px rgba(40,167,69,0.18);
-    background: #f4fbf6;
+    box-shadow: 0 0 0 2px var(--green), var(--shadow-green-soft);
+    background: var(--success-bg-soft);
 }
 
 body.page-admin .stat-number {
@@ -1620,12 +1669,12 @@ body.page-admin .filter-group label {
 body.page-admin .filter-group select {
     padding: 10px 14px;
     border: 1px solid var(--gray-light);
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     background: var(--white);
     font-size: 14px;
     color: var(--gray-dark);
     cursor: pointer;
-    transition: border-color 0.2s ease;
+    transition: border-color var(--transition-fast);
 }
 
 body.page-admin .filter-group select:focus {
@@ -1669,10 +1718,10 @@ body.page-admin .sort-btn {
     color: var(--gray-dark);
     background: var(--white);
     border: 1px solid var(--gray-light);
-    border-radius: 999px;
+    border-radius: var(--radius-full);
     padding: 6px 14px;
     font-size: 13px;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -1707,17 +1756,17 @@ body.page-admin .requests-container {
 
 body.page-admin .request-item {
     background: var(--white);
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     padding: 24px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: var(--shadow-xs);
     border: 1px solid var(--gray-light);
-    transition: all 0.25s ease;
+    transition: all var(--transition);
 }
 
 body.page-admin .request-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    box-shadow: var(--shadow-card-hover);
     border-color: var(--green);
 }
 
@@ -1746,7 +1795,7 @@ body.page-admin .user-info p {
 body.page-admin .request-id {
     background: var(--gray-bg);
     padding: 4px 14px;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-weight: 600;
     color: var(--gray-dark);
     font-size: 13px;
@@ -1754,7 +1803,7 @@ body.page-admin .request-id {
 
 body.page-admin .status-badge {
     padding: 4px 14px;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 12px;
     font-weight: 600;
     display: inline-block;
@@ -1762,18 +1811,18 @@ body.page-admin .status-badge {
 }
 
 body.page-admin .status-new {
-    background: #fff3cd;
-    color: #856404;
+    background: var(--warning-bg);
+    color: var(--warning-text);
 }
 
 body.page-admin .status-assigned {
-    background: #d1ecf1;
-    color: #0c5460;
+    background: var(--info-bg);
+    color: var(--info-text);
 }
 
 body.page-admin .status-completed {
-    background: #d4edda;
-    color: #155724;
+    background: var(--success-bg-alt);
+    color: var(--success-text);
 }
 
 body.page-admin .request-details {
@@ -1786,7 +1835,7 @@ body.page-admin .request-details {
 body.page-admin .detail-item {
     padding: 12px 16px;
     background: var(--gray-bg);
-    border-radius: 16px;
+    border-radius: var(--radius-md);
 }
 
 body.page-admin .detail-label {
@@ -1827,18 +1876,18 @@ body.page-admin .form-select {
     width: 100%;
     padding: 12px 14px;
     border: 1.5px solid var(--gray-light);
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     background: var(--white);
 }
 
 body.page-admin .form-select:focus {
     outline: none;
     border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.12);
+    box-shadow: var(--ring-focus);
 }
 
 body.page-admin .btn-save {
@@ -1847,16 +1896,16 @@ body.page-admin .btn-save {
     background: var(--green);
     color: var(--white);
     border: none;
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    transition: all 0.25s ease;
+    transition: all var(--transition);
 }
 
 body.page-admin .btn-save:hover {
-    background: #218838;
+    background: var(--green-dark);
     transform: translateY(-2px);
 }
 
@@ -1872,11 +1921,11 @@ body.page-admin .pagination {
 body.page-admin .page-link {
     padding: 8px 16px;
     border: 1.5px solid var(--gray-light);
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     text-decoration: none;
     color: var(--gray-dark);
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
 }
 
 body.page-admin .page-link:hover, body.page-admin .page-link.active {
@@ -1890,7 +1939,7 @@ body.page-admin .empty-state {
     text-align: center;
     padding: 60px 20px;
     background: var(--gray-bg);
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
 }
 
 body.page-admin .empty-state i {
@@ -1919,7 +1968,7 @@ body.page-admin .notification {
     padding: 14px 24px;
     background: var(--green);
     color: var(--white);
-    border-radius: 40px;
+    border-radius: var(--radius-pill);
     box-shadow: var(--shadow);
     z-index: 1000;
     animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-out 2.5s forwards;
@@ -1931,7 +1980,7 @@ body.page-admin .notification {
 @media (max-width: 768px) {
     body.page-admin .container {
         margin: 10px;
-        border-radius: 20px;
+        border-radius: var(--radius-lg);
     }
     body.page-admin .header, body.page-admin .nav-bar, body.page-admin .stats-grid, body.page-admin .requests-container {
         padding: 20px;
