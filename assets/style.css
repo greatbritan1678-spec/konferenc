@@ -18,6 +18,7 @@
 :root {
     /* ----- Базовая палитра ----- */
     --gray-dark: #343A40;
+    --gray-dark-rgb: 52, 58, 64;      /* RGB-компоненты --gray-dark для rgba()-наложений */
     --gray-medium: #495057;
     --gray-light: #CED4DA;
     --gray-bg: #F4F6F8;
@@ -325,7 +326,7 @@ body.page-home .slide-text {
     position: absolute;
     bottom: 24px;
     left: 24px;
-    background: rgba(52, 58, 64, 0.85);
+    background: rgba(var(--gray-dark-rgb), 0.85);
     backdrop-filter: blur(4px);
     padding: 10px 20px;
     border-radius: var(--radius-pill);
@@ -339,7 +340,7 @@ body.page-home .prev, body.page-home .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(52, 58, 64, 0.7);
+    background: rgba(var(--gray-dark-rgb), 0.7);
     color: var(--white);
     border: none;
     cursor: pointer;
@@ -784,7 +785,7 @@ body.page-register {
 body.page-register .bg-decor {
     position: fixed;
     border-radius: var(--radius-circle);
-    background: rgba(40, 167, 69, 0.04);
+    background: rgba(var(--green-rgb), 0.04);
     animation: float 20s infinite linear;
     z-index: 0;
 }
